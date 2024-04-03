@@ -1,0 +1,106 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    font-style: italic;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+    isolation: isolate;
+}
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+    /* Colours */
+    --_hue-primary: 350;
+    --_hue-secondary: 260;
+
+    /* Light Mode */
+    --bkg--light: var(--_hue-secondary) 25% 95%;
+    --txt--light: var(--_hue-primary) 40% 5%;
+    --accent--light: var(--_hue-primary) 70% 60%;
+    --muted--light: var(--_hue-secondary) 10% 80%;
+    /* Dark Mode */
+    --bkg--dark: var(--_hue-secondary) 15% 10%;
+    --txt--dark: var(--_hue-primary) 15% 90%;
+    --accent--dark: var(--_hue-primary) 80% 70%;
+    --muted--dark: var(--_hue-secondary) 15% 30%;
+
+    --bkg: var(--bkg--light);
+    --txt: var(--txt--light);
+    --accent: var(--accent--light);
+    --muted: var(--muted--light);
+    color-scheme: light;
+
+    & :focus-visible {
+        outline: solid 1px hsl(var(--accent) / 0.5);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bkg: var(--bkg--dark);
+        --txt: var(--txt--dark);
+        --accent: var(--accent--dark);
+        --muted: var(--muted--dark);
+        color-scheme: dark;
+    }
+}
+
+body {
+    color: hsl(var(--txt));
+    background-color: hsl(var(--bkg));
+    max-width: 64rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4rem;
+    margin-top: 2rem;
+}
