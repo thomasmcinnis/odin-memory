@@ -101,6 +101,13 @@ body {
 main {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 4rem;
+    gap: 3rem;
     margin-top: 2rem;
+}
+
+.card {
+    background-color: white;
+    padding: 1rem;
+    overflow: hidden;
+    border-radius: 0.75rem;
 }

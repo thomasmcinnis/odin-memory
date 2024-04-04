@@ -1,8 +1,12 @@
+import PropTypes from "prop-types"
+
 export default function Card({ children }) {
     return (
-        <div>
-            <h2>My card</h2>
+        <div className="card">
             {children}
         </div>
     )
+}
+Card.propTypes = {
+    children: PropTypes.node.isRequired,
 }
