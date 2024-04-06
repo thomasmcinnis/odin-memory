@@ -24,6 +24,13 @@ function App() {
         return array;
     }
 
+    function resetCards() {
+        const nextData = data.map((curr) => {
+            return { ...curr, played: false };
+        })
+        setData(shuffle(nextData))
+    }
+
     function handleClick(id) {
         const item = data.filter((item) => item.id === id)[0];
 
@@ -31,7 +38,7 @@ function App() {
         // - reset the entire array
         // - reset the currScore
         if (item.played === true) {
-            fetchData();
+            resetCards()
             setCurrScore(0);
             return;
         }
@@ -90,8 +97,13 @@ function App() {
 
     return (
         <div>
-            <h1>Croc Memory Game</h1>
-            <Score currScore={currScore} highScore={highScore} />
+            <header>
+                <div>
+                    <h1>Croc Memory Game</h1>
+                    <p>Hunt for crocs... don&apos;t click the same croc twice!</p>
+                </div>
+                <Score currScore={currScore} highScore={highScore} />
+            </header>
             {data ? (
                 <main>
                     {data.map(item => (

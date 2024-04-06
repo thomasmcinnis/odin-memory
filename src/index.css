@@ -98,6 +98,13 @@ body {
     padding: 0 1rem;
 }
 
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+}
+
 main {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -109,6 +116,19 @@ button {
     background-color: white;
     padding: 1rem;
     overflow: hidden;
-    border: 1px solid hsl(var(--accent));
+    border: 3px solid hsl(var(--accent));
     border-radius: 0.75rem;
+    cursor: pointer;
+}
+
+.scores {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: hsl(var(--accent));
+    border-radius: 0.75rem;
+    color: white;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
 }
