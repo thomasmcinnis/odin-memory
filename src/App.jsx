@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Card from './components/Card';
+import Score from './components/Score';
 
 class PlayCard {
     constructor(imgSrc, id) {
@@ -11,16 +11,44 @@ class PlayCard {
 
 function App() {
     const [data, setData] = useState(null);
+    const [currScore, setCurrScore] = useState(0);
+    const [highScore, setHighScore] = useState(0);
 
-    function shuffle() {
-        const array = Array.from(data);
+    function shuffle(array) {
         // Doing Fisher-Yates shuffle referenced here 
         // https://javascript.info/task/shuffle
         for (let i = array.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
-        setData(array);
+        return array;
+    }
+
+    function handleClick(id) {
+        const item = data.filter((item) => item.id === id)[0];
+
+        // If clicked item already played
+        // - reset the entire array
+        // - reset the currScore
+        if (item.played === true) {
+            fetchData();
+            setCurrScore(0);
+            return;
+        }
+
+        // Else
+        // - create new array from data, update played
+        // - shuffle the board and set to state
+        // - update the score
+        const nextData = data.map((curr) => {
+            if (curr.id === id) {
+                return { ...curr, played: true };
+            } else {
+                return curr;
+            }
+        });
+        setData(shuffle(nextData));
+        setCurrScore(currScore + 1);
     }
 
     async function fetchData() {
@@ -48,21 +76,32 @@ function App() {
         }
     }
 
+    // Fetch the data on page load
     useEffect(() => {
         fetchData();
     }, [])
 
+    // Maintain the high score based on change to score
+    useEffect(() => {
+        if (currScore > highScore) {
+            setHighScore(currScore);
+        }
+    }, [currScore, highScore])
+
     return (
         <div>
             <h1>Croc Memory Game</h1>
+            <Score currScore={currScore} highScore={highScore} />
             {data ? (
                 <main>
                     {data.map(item => (
-                        <Card key={item.id}>
+                        <button
+                            key={item.id}
+                            onClick={() => { handleClick(item.id) }}
+                        >
                             <img src={item.imgSrc} alt="" />
-                        </Card>
+                        </button>
                     ))}
-                    <button onClick={shuffle}>Shuffle</button>
                 </main>
             ) : (
                 <p>Loading...</p>

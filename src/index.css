@@ -105,9 +105,10 @@ main {
     margin-top: 2rem;
 }
 
-.card {
+button {
     background-color: white;
     padding: 1rem;
     overflow: hidden;
+    border: 1px solid hsl(var(--accent));
     border-radius: 0.75rem;
 }
